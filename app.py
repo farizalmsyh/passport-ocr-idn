@@ -39,7 +39,7 @@ def ocr_image():
     sharpened = cv2.addWeighted(img, 1.5, blurred, -0.5, 0)
 
     # Save the processed image temporarily to pass to passporteye
-    temp_image_path = 'folder/temp_passport_image.jpg'
+    temp_image_path = 'upload/temp_passport_image.jpg'
     cv2.imwrite(temp_image_path, sharpened)
 
     # Perform OCR using passporteye's MRZ reader
