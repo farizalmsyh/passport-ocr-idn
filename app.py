@@ -28,6 +28,9 @@ def ocr_image():
 
     if mrz is not None:
         mrz_data = mrz.to_dict()
+        raw_first = mrz_data['raw_text'].split("\n")[0]
+        raw_second = mrz_data['raw_text'].split("\n")[1] 
+        
         return jsonify({
             'number': mrz_data['number'].replace('<', ''),
             'surname': mrz_data['surname'],
@@ -36,6 +39,8 @@ def ocr_image():
             'date_of_birth': convert_mrz_date(mrz_data['date_of_birth']),
             'expiration_date': convert_mrz_date(mrz_data['expiration_date']),
             'sex': "L" if mrz_data['sex'] == "M" else "P",
+            'raw_first': clean_mrz(raw_first),
+            'raw_second': raw_second
         })
     else:
         return jsonify({'error': 'MRZ not found'})
